@@ -29,4 +29,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Les expériences publiées par cet utilisateur
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    // Les expériences enregistrées par cet utilisateur
+    public function savedExperiences()
+    {
+        return $this->hasMany(SavedExperience::class);
+    }
 }
