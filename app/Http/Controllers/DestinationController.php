@@ -7,9 +7,16 @@ use App\Models\Destination;
 class DestinationController extends Controller
 {
     public function index()
-{
-    $destinations = Destination::all();
+    {
+        $destinations = Destination::all();
 
-    return view('destinations.index', compact('destinations'));
-}
+        return view('destinations.index', compact('destinations'));
+    }
+
+    public function show($id)
+    {
+        $destination = Destination::findOrFail($id);
+
+        return view('destinations.show', compact('destination'));
+    }
 }

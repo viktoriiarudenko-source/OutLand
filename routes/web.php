@@ -8,3 +8,5 @@ Route::get('/', function () {
 });
 
 Route::get('/destinations', [DestinationController::class, 'index']);
+
+Route::get('/destinations/{id}', [DestinationController::class, 'show']);
