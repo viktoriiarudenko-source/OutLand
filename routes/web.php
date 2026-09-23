@@ -10,3 +10,7 @@ Route::get('/', function () {
 Route::get('/destinations', [DestinationController::class, 'index']);
 
 Route::get('/destinations/{id}', [DestinationController::class, 'show']);
+
+use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
+
+Route::get('/admin/destinations', [AdminDestinationController::class, 'index']);
