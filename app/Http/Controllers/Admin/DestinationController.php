@@ -53,15 +53,30 @@ class DestinationController extends Controller
         return view('admin.destinations.edit', compact('destination'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
+        // Récupère la destination
         $destination = Destination::findOrFail($id);
 
-        $destination->update([
-            'name' => request('name'),
-            'image' => request('image'),
-            'description' => request('description'),
+        // Vérification des informations
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
         ]);
+
+        // Modifie le nom et la description
+        $destination->name = $request->name;
+        $destination->description = $request->description;
+
+        // Si une nouvelle image est choisie,
+        // elle remplace l'ancienne
+        if ($request->hasFile('image')) {
+            $destination->image = $request->file('image')->store('destinations', 'public');
+        }
+
+        // Enregistre les modifications
+        $destination->save();
 
         return redirect('/admin/destinations');
     }
