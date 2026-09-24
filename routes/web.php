@@ -108,7 +108,7 @@ Route::delete(
 // ADMIN - DESTINATIONS
 // ==============================
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     // List destinations
     Route::get(
