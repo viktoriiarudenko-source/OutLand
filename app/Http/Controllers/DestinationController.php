@@ -14,9 +14,13 @@ class DestinationController extends Controller
     }
 
     public function show($id)
-    {
-        $destination = Destination::findOrFail($id);
+{
+    // Récupère le pays
+    $destination = Destination::findOrFail($id);
 
-        return view('destinations.show', compact('destination'));
-    }
+    // Récupère tous les commentaires liés à ce pays
+    $experiences = \App\Models\Experience::where('destination_id', $id)->get();
+
+    return view('destinations.show', compact('destination', 'experiences'));
+}
 }
