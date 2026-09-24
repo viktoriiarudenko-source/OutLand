@@ -4,13 +4,17 @@
         <h2>Mes expériences postées</h2>
     </x-slot>
 
-
     <div>
 
         <h1>Mes expériences postées</h1>
 
+        <p>
+            Choisissez un pays pour retrouver les expériences
+            que vous y avez publiées.
+        </p>
 
-        @if ($experiences->isEmpty())
+
+        @if ($destinations->isEmpty())
 
             <p>
                 Vous n'avez encore publié aucune expérience.
@@ -20,90 +24,33 @@
                 Explorer les destinations
             </a>
 
-
         @else
 
-            @foreach ($experiences as $experience)
+            @foreach ($destinations as $destination)
 
                 <div>
 
-                    {{-- DESTINATION --}}
-                    <h2>
-                        {{ $experience->destination->name }}
-                    </h2>
-
-
-                    {{-- TITRE DU POST --}}
-                    <h3>
-                        {{ $experience->title }}
-                    </h3>
-
-
-                    {{-- NOTE --}}
-                    @if ($experience->rating)
-
-                        <p>
-
-                            @for ($i = 1; $i <= 5; $i++)
-
-                                @if ($i <= $experience->rating)
-                                    ★
-                                @else
-                                    ☆
-                                @endif
-
-                            @endfor
-
-                            {{ $experience->rating }}/5
-
-                        </p>
-
-                    @endif
-
-
-                    {{-- TEXTE --}}
-                    <p>
-                        {{ $experience->content }}
-                    </p>
-
-
-                    {{-- PHOTO --}}
-                    @if ($experience->photo)
+                    {{-- IMAGE DU PAYS --}}
+                    @if ($destination->image)
 
                         <img
-                            src="{{ asset('storage/' . $experience->photo) }}"
-                            alt="{{ $experience->title }}"
+                            src="{{ asset('storage/' . $destination->image) }}"
+                            alt="{{ $destination->name }}"
                             width="300"
                         >
 
                     @endif
 
 
-                    {{-- MODIFIER --}}
-                    <a href="/experiences/{{ $experience->id }}/edit">
-                        Modifier
-                    </a>
+                    {{-- NOM DU PAYS --}}
+                    <h2>
+                        {{ $destination->name }}
+                    </h2>
 
 
-                    {{-- SUPPRIMER --}}
-                    <form
-                        action="/experiences/{{ $experience->id }}"
-                        method="POST"
-                    >
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit">
-                            Supprimer
-                        </button>
-
-                    </form>
-
-
-                    {{-- VOIR LA DESTINATION --}}
-                    <a href="/destinations/{{ $experience->destination_id }}">
-                        Voir la destination
+                    {{-- ACCÉDER À MES POSTS POUR CE PAYS --}}
+                    <a href="/my-experiences/destination/{{ $destination->id }}">
+                        Voir mes expériences
                     </a>
 
                 </div>
