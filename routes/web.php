@@ -54,6 +54,11 @@ Route::get(
     [ExperienceController::class, 'myExperiences']
 )->middleware('auth');
 
+Route::get(
+    '/my-experiences/destination/{destinationId}',
+    [ExperienceController::class, 'myExperiencesByDestination']
+)->middleware('auth');
+
 // Show experience creation form
 Route::get(
     '/destinations/{destinationId}/experiences/create',

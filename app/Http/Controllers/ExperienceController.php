@@ -7,14 +7,50 @@ use App\Models\Experience;
 
 class ExperienceController extends Controller
 {
-    // Affiche les expériences publiées par l'utilisateur connecté
+    // Affiche les pays dans lesquels l'utilisateur a publié une expérience
     public function myExperiences()
     {
+        // Récupère toutes les expériences de l'utilisateur connecté
         $experiences = Experience::where('user_id', auth()->id())
             ->with('destination')
             ->get();
 
-        return view('experiences.my-experiences', compact('experiences'));
+        // Récupère les pays liés à ces expériences
+        // et évite d'afficher plusieurs fois le même pays
+        $destinations = $experiences
+            ->pluck('destination')
+            ->filter()
+            ->unique('id');
+
+        return view(
+            'experiences.my-experiences',
+            compact('destinations')
+        );
+    }
+
+
+    // Affiche les expériences de l'utilisateur pour un pays précis
+    public function myExperiencesByDestination($destinationId)
+    {
+        // Récupère uniquement les expériences de l'utilisateur
+        // qui appartiennent au pays sélectionné
+        $experiences = Experience::where('user_id', auth()->id())
+            ->where('destination_id', $destinationId)
+            ->with('destination')
+            ->get();
+
+        // Si l'utilisateur n'a aucun post pour ce pays
+        if ($experiences->isEmpty()) {
+            abort(404);
+        }
+
+        // Récupère les informations du pays
+        $destination = $experiences->first()->destination;
+
+        return view(
+            'experiences.my-experiences-destination',
+            compact('experiences', 'destination')
+        );
     }
 
 
@@ -23,6 +59,7 @@ class ExperienceController extends Controller
     {
         return view('experiences.create', compact('destinationId'));
     }
+
 
     // Enregistre le commentaire dans la BDD
     public function store(Request $request, $destinationId)
@@ -60,6 +97,7 @@ class ExperienceController extends Controller
         return redirect('/destinations/' . $destinationId);
     }
 
+
     // Affiche le formulaire pour modifier un commentaire
     public function edit($id)
     {
@@ -74,6 +112,7 @@ class ExperienceController extends Controller
         // Affiche le formulaire de modification
         return view('experiences.edit', compact('experience'));
     }
+
 
     // Modifie un commentaire
     public function update(Request $request, $id)
@@ -110,6 +149,7 @@ class ExperienceController extends Controller
         // Retourne sur la page du pays
         return redirect('/destinations/' . $experience->destination_id);
     }
+
 
     // Supprime un commentaire
     public function destroy($id)
