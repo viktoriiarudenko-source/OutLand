@@ -6,17 +6,17 @@
         </h2>
     </x-slot>
 
-
     <div>
 
         <h1>Mon Voyage</h1>
 
         <p>
-            Retrouvez ici vos expériences et vos prochains voyages.
+            Retrouvez ici les expériences que vous avez publiées
+            et celles que vous avez enregistrées.
         </p>
 
 
-        {{-- CARTE : EXPÉRIENCES POSTÉES --}}
+        {{-- MES EXPÉRIENCES POSTÉES --}}
         <div>
 
             <h2>Expériences postées</h2>
@@ -32,14 +32,18 @@
         </div>
 
 
-        {{-- CARTE : À VENIR --}}
+        {{-- MES ENREGISTREMENTS --}}
         <div>
 
-            <h2>À venir</h2>
+            <h2>Mes enregistrements</h2>
 
             <p>
-                Cette fonctionnalité sera disponible prochainement.
+                Retrouvez toutes les expériences que vous avez enregistrées.
             </p>
+
+            <a href="/saved-experiences">
+                Voir mes enregistrements
+            </a>
 
         </div>
 
