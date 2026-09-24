@@ -29,8 +29,12 @@ class ExperienceController extends Controller
         $experience->title = $request->title;
         $experience->content = $request->content;
 
-        // Pour l'instant, on s'occupera de la photo juste après
-        $experience->photo = null;
+        // Si une photo a été ajoutée
+        if ($request->hasFile('photo')) {
+            $experience->photo = $request->file('photo')->store('experiences', 'public');
+        } else {
+            $experience->photo = null;
+        }
 
         // Temporaire : utilisateur 1
         $experience->user_id = 1;

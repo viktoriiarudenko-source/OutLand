@@ -20,6 +20,8 @@
         <div>
             <h3>{{ $experience->title }}</h3>
 
+            <p>Publié par : {{ $experience->user->name }}</p>
+
             <p>{{ $experience->content }}</p>
 
             @if ($experience->photo)
