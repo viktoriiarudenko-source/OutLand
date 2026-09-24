@@ -1,7 +1,11 @@
 <h1>{{ $destination->name }}</h1>
 
 @if ($destination->image)
-    <img src="{{ asset('images/' . $destination->image) }}" alt="{{ $destination->name }}">
+    <img
+        src="{{ asset('storage/' . $destination->image) }}"
+        alt="{{ $destination->name }}"
+        width="500"
+    >
 @endif
 
 <p>{{ $destination->description }}</p>
@@ -90,4 +94,4 @@
 
 <a href="/destinations/{{ $destination->id }}/experiences/create">
     Ajouter un commentaire
-</a>
+</a> 
