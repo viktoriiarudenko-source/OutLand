@@ -19,4 +19,10 @@ class Experience extends Model
     {
         return $this->belongsTo(Destination::class);
     }
+
+    // Une expérience peut être enregistrée par plusieurs utilisateurs
+    public function savedExperiences()
+    {
+        return $this->hasMany(SavedExperience::class);
+    }
 }

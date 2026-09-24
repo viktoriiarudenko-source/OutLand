@@ -8,6 +8,14 @@ class SavedExperience extends Model
 {
     protected $table = 'saved_experiences';
 
+    // La table saved_experiences n'a pas de created_at / updated_at
+    public $timestamps = false;
+
+    protected $fillable = [
+        'user_id',
+        'experience_id',
+    ];
+
     // L'enregistrement appartient à un utilisateur
     public function user()
     {

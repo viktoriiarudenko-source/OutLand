@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\SavedExperienceController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,23 @@ Route::get(
 Route::post(
     '/destinations/{destinationId}/experiences',
     [ExperienceController::class, 'store']
+)->middleware('auth');
+
+
+// ==============================
+// SAVED EXPERIENCES / FAVORIS
+// ==============================
+
+// Enregistrer une expérience dans les favoris
+Route::post(
+    '/experiences/{experienceId}/save',
+    [SavedExperienceController::class, 'store']
+)->middleware('auth');
+
+// Retirer une expérience des favoris
+Route::delete(
+    '/experiences/{experienceId}/save',
+    [SavedExperienceController::class, 'destroy']
 )->middleware('auth');
 
 

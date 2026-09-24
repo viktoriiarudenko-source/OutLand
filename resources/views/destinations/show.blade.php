@@ -27,6 +27,41 @@
             @if ($experience->photo)
                 <img src="{{ asset('storage/' . $experience->photo) }}" width="300">
             @endif
+
+
+            @auth
+
+                @php
+                    $isSaved = $experience->savedExperiences
+                        ->where('user_id', auth()->id())
+                        ->isNotEmpty();
+                @endphp
+
+                @if ($isSaved)
+
+                    <form action="/experiences/{{ $experience->id }}/save" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">
+                            ♥ Enregistré — Retirer
+                        </button>
+                    </form>
+
+                @else
+
+                    <form action="/experiences/{{ $experience->id }}/save" method="POST">
+                        @csrf
+
+                        <button type="submit">
+                            ♡ Enregistrer
+                        </button>
+                    </form>
+
+                @endif
+
+            @endauth
+
         </div>
 
     @endforeach
