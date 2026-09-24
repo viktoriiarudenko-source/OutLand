@@ -53,13 +53,13 @@ Route::get('/destinations/{id}', [DestinationController::class, 'show']);
 Route::get(
     '/destinations/{destinationId}/experiences/create',
     [ExperienceController::class, 'create']
-);
+)->middleware('auth');
 
 // Store experience
 Route::post(
     '/destinations/{destinationId}/experiences',
     [ExperienceController::class, 'store']
-);
+)->middleware('auth');
 
 
 // ==============================
