@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;500&display=swap');
 
+
+/* ==============================
+   DESTINATION HERO
+   ============================== */
+
 .destination-hero {
     position: relative;
     width: 100%;
@@ -36,6 +41,11 @@
     letter-spacing: 0.02em;
 }
 
+
+/* ==============================
+   DESTINATION DESCRIPTION
+   ============================== */
+
 .destination-description {
     max-width: 900px;
     margin: 0 auto;
@@ -50,12 +60,17 @@
     margin: 0;
 }
 
+
+/* ==============================
+   DESTINATION PAGE
+   ============================== */
+
 body {
-    background: #411C21;
+    background: #411c21;
 }
 
 .min-h-screen {
-    background: #411C21 !important;
+    background: #411c21 !important;
 }
 
 .destination-page {
@@ -70,9 +85,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* ==============================
-   EXPERIENCE CARDS
-   ============================== */
 
 /* ==============================
    EXPERIENCE CARDS
@@ -90,6 +102,7 @@ body {
     overflow: hidden;
 }
 
+
 /* Image */
 
 .experience-card > img {
@@ -100,6 +113,7 @@ body {
     height: 120px;
     object-fit: cover;
 }
+
 
 /* Main text */
 
@@ -115,11 +129,13 @@ body {
     line-height: 1.45;
 }
 
+
 /* Author */
 
 .experience-card p:first-of-type {
     font-size: 10px;
 }
+
 
 /* Rating */
 
@@ -127,6 +143,7 @@ body {
     letter-spacing: 2px;
     font-size: 12px;
 }
+
 
 /* Save */
 
@@ -150,12 +167,14 @@ body {
     text-decoration: underline;
 }
 
+
 /* Edit / delete */
 
 .experience-card a {
     color: #24191b;
     font-size: 10px;
 }
+
 
 /* ==============================
    ALTERNATING CARDS
@@ -177,6 +196,7 @@ body {
     margin-right: 145px;
 }
 
+
 /* ==============================
    COMMENTS TITLE
    ============================== */
@@ -191,6 +211,7 @@ body {
     letter-spacing: 0.02em;
     text-align: center;
 }
+
 
 /* ==============================
    ADD EXPERIENCE BUTTON
@@ -216,6 +237,7 @@ body {
     color: #411c21;
 }
 
+
 /* ==============================
    BACK TO DESTINATIONS BUTTON
    ============================== */
@@ -239,6 +261,7 @@ body {
     background: #d8c4c5;
     color: #411c21;
 }
+
 
 /* ==============================
    CREATE EXPERIENCE PAGE
@@ -349,17 +372,19 @@ body {
     text-underline-offset: 4px;
 }
 
+
 /* ==============================
    LOGIN PAGE
    ============================== */
 
 .login-page {
-    min-height: calc(100vh - 70px);
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 70px 20px;
-    background: #411c21;
+    background: #182528 !important;
     color: #f4f1eb;
     font-family: 'Poppins', sans-serif;
 }
@@ -481,5 +506,58 @@ body {
 
 .login-button:hover {
     background: #d8c4c5;
-    color: #411c21;
+    color: #182528;
+}
+
+
+/* ==============================
+   GUEST LAYOUT
+   ============================== */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.guest-page {
+    min-height: 100vh;
+    width: 100%;
+    background: #182528 !important;
+    color: #f4f1eb;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 45px 20px;
+}
+
+.guest-logo {
+    margin-bottom: 45px;
+}
+
+.guest-logo a {
+    color: #f4f1eb;
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+}
+
+.guest-container {
+    width: min(430px, 100%);
+}
+
+
+/* ==============================
+   LOGIN FULL BACKGROUND
+   ============================== */
+
+body:has(.guest-page) {
+    background: #182528 !important;
+}
+
+body:has(.guest-page) .min-h-screen {
+    background: #182528 !important;
 }
