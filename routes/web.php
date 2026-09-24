@@ -50,6 +50,12 @@ Route::get('/destinations/{id}', [DestinationController::class, 'show']);
 // EXPERIENCES
 // ==============================
 
+// Afficher les expériences publiées par l'utilisateur connecté
+Route::get(
+    '/my-experiences',
+    [ExperienceController::class, 'myExperiences']
+)->middleware('auth');
+
 // Show experience creation form
 Route::get(
     '/destinations/{destinationId}/experiences/create',

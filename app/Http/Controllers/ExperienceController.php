@@ -7,6 +7,17 @@ use App\Models\Experience;
 
 class ExperienceController extends Controller
 {
+    // Affiche les expériences publiées par l'utilisateur connecté
+    public function myExperiences()
+    {
+        $experiences = Experience::where('user_id', auth()->id())
+            ->with('destination')
+            ->get();
+
+        return view('experiences.my-experiences', compact('experiences'));
+    }
+
+
     // Affiche le formulaire pour ajouter un commentaire
     public function create($destinationId)
     {
