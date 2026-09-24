@@ -2,7 +2,6 @@
     <x-slot name="header">
         <h2>Explorer les destinations</h2>
     </x-slot>
-</x-slot>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +22,7 @@
         body {
             background: #182528;
             color: #f4f1eb;
-            font-family: Arial, sans-serif;
+           font-family: 'Poppins', sans-serif;
         }
 
         .explorer-header {
