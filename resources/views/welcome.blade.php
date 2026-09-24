@@ -7,6 +7,14 @@
 
     <title>OutLand</title>
 
+    {{-- POLICE POPPINS --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+        rel="stylesheet"
+    >
+
     <style>
 
         /* ============================== */
@@ -17,8 +25,14 @@
             box-sizing: border-box;
         }
 
+        html,
         body {
             margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
         }
 
 
@@ -27,15 +41,20 @@
         /* ============================== */
 
         .home-header {
-            width: 100%;
-            height: 74px;
+            position: absolute;
 
-            display: flex;
-            align-items: center;
+            top: 0;
+            left: 0;
+
+            z-index: 100;
+
+            width: 100%;
+            height: 90px;
 
             padding: 0 35px;
 
-            background-color: #182123;
+            /* AUCUN FOND */
+            background: transparent;
         }
 
 
@@ -46,7 +65,8 @@
             display: flex;
             align-items: center;
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+            /* PETITE BARRE DE 1PX SOUS LE HEADER */
+            border-bottom: 1px solid rgba(224, 215, 212, 0.65);
         }
 
 
@@ -55,24 +75,22 @@
         /* ============================== */
 
         .home-logo {
-            margin-right: 50px;
+            flex-shrink: 0;
 
-            color: transparent;
+            margin-right: 70px;
 
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
+            color: #E0D7D4;
 
             font-family: Arial, sans-serif;
-            font-size: 29px;
+            font-size: 30px;
             font-weight: 400;
-
-            letter-spacing: 0.5px;
 
             text-decoration: none;
         }
 
 
         /* ============================== */
-        /* LIENS DU HEADER */
+        /* NAVIGATION */
         /* ============================== */
 
         .home-nav-links {
@@ -81,23 +99,37 @@
             display: flex;
             align-items: center;
 
-            gap: 42px;
+            gap: 65px;
         }
 
 
-        .home-nav-links a {
-            color: rgba(255, 255, 255, 0.82);
+        /* MON VOYAGE / EXPLORER / ADMINISTRATION */
 
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: 300;
+        .home-nav-links a {
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 25px;
+            font-weight: 400;
+
+            /*
+                Figma : -6 %
+                En CSS : -0.06em
+            */
+            letter-spacing: -0.06em;
+
+            /*
+                #E0D7D4
+                Opacité 83 %
+            */
+            color: rgba(224, 215, 212, 0.83);
 
             text-decoration: none;
+
         }
 
 
         .home-nav-links a:hover {
-            color: white;
+            color: #E0D7D4;
         }
 
 
@@ -115,25 +147,29 @@
         }
 
 
-        /* PETIT CARRÉ AVEC FLÈCHE */
+        /* PETIT CARRÉ + FLÈCHE */
 
         .home-login::after {
             content: "→";
 
-            width: 21px;
-            height: 21px;
+            width: 25px;
+            height: 25px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            border: 1px solid rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(224, 215, 212, 0.83);
+
             border-radius: 2px;
 
-            color: white;
+            color: rgba(224, 215, 212, 0.83);
 
-            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+
             line-height: 1;
+
         }
 
 
@@ -147,24 +183,27 @@
 
 
         .home-logout {
-            color: rgba(255, 255, 255, 0.82);
-
-            background: transparent;
+            padding: 0;
 
             border: none;
 
-            padding: 0;
+            background: transparent;
 
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: 300;
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 25px;
+            font-weight: 400;
+
+            letter-spacing: -0.06em;
+
+            color: rgba(224, 215, 212, 0.83);
 
             cursor: pointer;
         }
 
 
         .home-logout:hover {
-            color: white;
+            color: #E0D7D4;
         }
 
 
@@ -191,7 +230,6 @@
             </a>
 
 
-            {{-- NAVIGATION --}}
             <div class="home-nav-links">
 
 
@@ -221,7 +259,7 @@
                 @auth
 
 
-                    {{-- ADMIN --}}
+                    {{-- ADMINISTRATION --}}
                     @if (auth()->user()->is_admin)
 
                         <a href="/admin/destinations">
@@ -252,7 +290,7 @@
                 @else
 
 
-                    {{-- CONNEXION --}}
+                    {{-- ME CONNECTER --}}
                     <a
                         href="{{ route('login') }}"
                         class="home-login"
@@ -318,6 +356,7 @@
 
                 @else
 
+                    {{-- UTILISATEUR NON CONNECTÉ --}}
                     <a href="{{ route('login') }}">
                         Mon Voyage
                     </a>
@@ -353,7 +392,7 @@
                     <div>
 
 
-                        {{-- IMAGE --}}
+                        {{-- IMAGE DE LA DESTINATION --}}
                         @if ($destination->image)
 
                             <a href="/destinations/{{ $destination->id }}">
@@ -369,13 +408,13 @@
                         @endif
 
 
-                        {{-- NOM --}}
+                        {{-- NOM DE LA DESTINATION --}}
                         <h3>
                             {{ $destination->name }}
                         </h3>
 
 
-                        {{-- LIEN --}}
+                        {{-- VOIR LA DESTINATION --}}
                         <a href="/destinations/{{ $destination->id }}">
                             Découvrir
                         </a>
@@ -388,7 +427,7 @@
             </div>
 
 
-            {{-- VOIR PLUS --}}
+            {{-- VOIR TOUTES LES DESTINATIONS --}}
             <a href="/destinations">
                 Voir plus
             </a>
@@ -398,7 +437,7 @@
 
 
         {{-- ============================== --}}
-        {{-- DEUXIÈME CARTE --}}
+        {{-- DEUXIÈME CARTE EXPLICATIVE --}}
         {{-- ============================== --}}
 
         <section>
