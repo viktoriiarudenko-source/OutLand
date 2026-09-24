@@ -64,6 +64,10 @@
 
                 @if ($experience->user_id === auth()->id())
 
+                    <a href="/experiences/{{ $experience->id }}/edit">
+                        Modifier mon commentaire
+                    </a>
+
                     <form action="/experiences/{{ $experience->id }}" method="POST">
                         @csrf
                         @method('DELETE')
