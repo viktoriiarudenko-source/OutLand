@@ -14,6 +14,8 @@
         <!-- Scripts -->
     
     </head>
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
