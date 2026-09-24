@@ -2,7 +2,13 @@
     <x-slot name="header">
         <h2>Explorer les destinations</h2>
     </x-slot>
+</x-slot>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
     <style>
         * {
             box-sizing: border-box;
