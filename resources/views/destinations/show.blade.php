@@ -1,54 +1,5 @@
 <x-app-layout>
 
-    <style>
-    .destination-hero {
-        position: relative;
-        width: 100%;
-        height: 520px;
-        overflow: hidden;
-    }
-
-    .destination-hero img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .destination-hero-overlay {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: flex-start;
-        padding: 35px 45px;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.35),
-            rgba(0, 0, 0, 0)
-        );
-    }
-
-    .destination-hero h1 {
-        margin: 0;
-        color: white;
-        font-family: 'Playfair Display', serif;
-        font-size: 52px;
-        font-weight: 400;
-    }
-    .destination-description {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 70px 30px;
-    color: #f4f1eb;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-.destination-description p {
-    margin: 0;
-}
-</style> 
 
     <div>
 
