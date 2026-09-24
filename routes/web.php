@@ -100,6 +100,11 @@ Route::get(
     [SavedExperienceController::class, 'index']
 )->middleware('auth');
 
+Route::get(
+    '/saved-experiences/destination/{destinationId}',
+    [SavedExperienceController::class, 'byDestination']
+)->middleware('auth');
+
 // Enregistrer une expérience dans les favoris
 Route::post(
     '/experiences/{experienceId}/save',

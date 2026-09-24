@@ -1,56 +1,70 @@
-<h1>Mes expériences enregistrées</h1>
+<x-app-layout>
 
-@if ($savedExperiences->isEmpty())
+    <x-slot name="header">
+        <h2>Mes enregistrements</h2>
+    </x-slot>
 
-    <p>Vous n'avez encore enregistré aucune expérience.</p>
+    <div>
 
-@else
+        <h1>Mes enregistrements</h1>
 
-    @foreach ($savedExperiences as $savedExperience)
+        <p>
+            Choisissez un pays pour retrouver les expériences
+            que vous avez enregistrées.
+        </p>
 
-        <div>
-
-            <h2>{{ $savedExperience->experience->title }}</h2>
-
-            <p>
-                Destination :
-                {{ $savedExperience->experience->destination->name }}
-            </p>
+        @if ($destinations->isEmpty())
 
             <p>
-                Publié par :
-                {{ $savedExperience->experience->user->name }}
+                Vous n'avez encore enregistré aucune expérience.
             </p>
 
-            <p>
-                {{ $savedExperience->experience->content }}
-            </p>
-
-            @if ($savedExperience->experience->photo)
-                <img
-                    src="{{ asset('storage/' . $savedExperience->experience->photo) }}"
-                    width="300"
-                >
-            @endif
-
-            <form
-                action="/experiences/{{ $savedExperience->experience->id }}/save"
-                method="POST"
-            >
-                @csrf
-                @method('DELETE')
-
-                <button type="submit">
-                    ♥ Retirer des favoris
-                </button>
-            </form>
-
-            <a href="/destinations/{{ $savedExperience->experience->destination->id }}">
-                Voir la destination
+            <a href="/destinations">
+                Explorer les destinations
             </a>
 
-        </div>
+        @else
 
-    @endforeach
+            @foreach ($destinations as $destination)
 
-@endif
+                <div>
+
+                    {{-- IMAGE DU PAYS --}}
+                    @if ($destination->image)
+
+                        <img
+                            src="{{ asset('storage/' . $destination->image) }}"
+                            alt="{{ $destination->name }}"
+                            width="300"
+                        >
+
+                    @endif
+
+
+                    {{-- NOM DU PAYS --}}
+                    <h2>
+                        {{ $destination->name }}
+                    </h2>
+
+
+                    {{-- VOIR LES ENREGISTREMENTS DE CE PAYS --}}
+                    <a href="/saved-experiences/destination/{{ $destination->id }}">
+                        Voir mes enregistrements
+                    </a>
+
+                </div>
+
+                <hr>
+
+            @endforeach
+
+        @endif
+
+
+        <a href="/dashboard">
+            Retour à Mon Voyage
+        </a>
+
+    </div>
+
+</x-app-layout>
