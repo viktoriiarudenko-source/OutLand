@@ -29,7 +29,7 @@
                 <h2>
                     Note moyenne :
 
-                    @for ($i = 1; $i <= 5; $i)
+                   @for ($i = 1; $i <= 5; $i++)
 
                         @if ($i <= round($averageRating))
                             ★
@@ -78,7 +78,7 @@
                     @if ($experience->rating)
 
                         <p>
-                            @for ($i = 1; $i <= 5; $i)
+                            @for ($i = 1; $i <= 5; $i++)
 
                                 @if ($i <= $experience->rating)
                                     ★
