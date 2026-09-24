@@ -14,23 +14,93 @@
         <!-- Scripts -->
 
     </head>
+
     <body class="font-sans antialiased">
+
         <div class="min-h-screen bg-gray-100">
+
+            {{-- NAVIGATION --}}
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
+
+            {{-- PAGE HEADING --}}
             @isset($header)
+
                 <header class="bg-white shadow">
+
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
                         {{ $header }}
+
                     </div>
+
                 </header>
+
             @endisset
 
-            <!-- Page Content -->
+
+            {{-- CONTENU DE LA PAGE --}}
             <main>
+
                 {{ $slot }}
+
             </main>
+
+
+            {{-- FOOTER --}}
+            <footer>
+
+                <div>
+
+                    {{-- LOGO / NOM --}}
+                    <a href="/">
+                        OutLand
+                    </a>
+
+
+                    {{-- NAVIGATION FOOTER --}}
+                    <div>
+
+                        <a href="/">
+                            Accueil
+                        </a>
+
+                        <a href="/destinations">
+                            Explorer
+                        </a>
+
+                        @auth
+
+                            <a href="/dashboard">
+                                Mon Voyage
+                            </a>
+
+                        @else
+
+                            <a href="{{ route('login') }}">
+                                Me connecter
+                            </a>
+
+                            <a href="{{ route('register') }}">
+                                Créer un compte
+                            </a>
+
+                        @endauth
+
+                    </div>
+
+
+                    {{-- COPYRIGHT --}}
+                    <p>
+                        © {{ date('Y') }} OutLand
+                    </p>
+
+                </div>
+
+            </footer>
+
         </div>
+
     </body>
+
 </html>

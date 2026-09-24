@@ -1,70 +1,83 @@
-<!DOCTYPE html>
-<html lang="fr">
+<x-app-layout>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Explorer les destinations</title>
-</head>
-
-<body>
-
-    <h1>Explorer les destinations</h1>
+    <x-slot name="header">
+        <h2>Explorer les destinations</h2>
+    </x-slot>
 
 
-    <!-- Barre de recherche -->
     <div>
-        <label for="search">Rechercher une destination</label>
 
-        <input
-            type="text"
-            id="search"
-            placeholder="Rechercher une destination..."
-        >
-    </div>
+        <h1>Explorer les destinations</h1>
 
 
-    <!-- Liste des destinations -->
-    <div id="destinations-list">
+        {{-- BARRE DE RECHERCHE --}}
+        <div>
 
-        @foreach ($destinations as $destination)
+            <label for="search">
+                Rechercher une destination
+            </label>
 
-            <div
-                class="destination"
-                data-name="{{ strtolower($destination->name) }}"
+            <input
+                type="text"
+                id="search"
+                placeholder="Rechercher une destination..."
             >
 
-                <h2>{{ $destination->name }}</h2>
+        </div>
 
-               @if ($destination->image)
-<img
-    src="{{ asset('storage/' . $destination->image) }}"
-    alt="{{ $destination->name }}"
-    width="300"
->
 
-@endif
+        {{-- LISTE DES DESTINATIONS --}}
+        <div id="destinations-list">
 
-                <br>
+            @foreach ($destinations as $destination)
 
-                <a href="/destinations/{{ $destination->id }}">
-                    Voir les commentaires
-                </a>
+                <div
+                    class="destination"
+                    data-name="{{ strtolower($destination->name) }}"
+                >
 
-            </div>
+                    {{-- NOM DU PAYS --}}
+                    <h2>
+                        {{ $destination->name }}
+                    </h2>
 
-        @endforeach
+
+                    {{-- IMAGE DU PAYS --}}
+                    @if ($destination->image)
+
+                        <img
+                            src="{{ asset('storage/' . $destination->image) }}"
+                            alt="{{ $destination->name }}"
+                            width="300"
+                        >
+
+                    @endif
+
+
+                    <br>
+
+
+                    {{-- VOIR LA DESTINATION --}}
+                    <a href="/destinations/{{ $destination->id }}">
+                        Voir les commentaires
+                    </a>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+
+        {{-- AUCUN RÉSULTAT --}}
+        <p id="no-results" style="display: none;">
+            Aucune destination trouvée.
+        </p>
 
     </div>
 
 
-    <!-- Message affiché si aucun pays ne correspond -->
-    <p id="no-results" style="display: none;">
-        Aucune destination trouvée.
-    </p>
-
-
+    {{-- RECHERCHE DYNAMIQUE --}}
     <script>
 
         // Récupère la barre de recherche
@@ -89,10 +102,12 @@
 
                 const destinationName = destination.dataset.name;
 
+
                 // Vérifie si le nom contient la recherche
                 if (destinationName.includes(search)) {
 
                     destination.style.display = 'block';
+
                     resultFound = true;
 
                 } else {
@@ -119,6 +134,4 @@
 
     </script>
 
-</body>
-
-</html>
+</x-app-layout>
