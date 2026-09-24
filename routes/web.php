@@ -20,3 +20,5 @@ Route::post('/admin/destinations', [AdminDestinationController::class, 'store'])
 
 Route::get('/admin/destinations/{id}/edit', [AdminDestinationController::class, 'edit']);
 
+Route::post('/admin/destinations/{id}', [AdminDestinationController::class, 'update']);
+
