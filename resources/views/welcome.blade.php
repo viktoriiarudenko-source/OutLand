@@ -124,7 +124,6 @@
             color: rgba(224, 215, 212, 0.83);
 
             text-decoration: none;
-
         }
 
 
@@ -169,7 +168,6 @@
             font-size: 16px;
 
             line-height: 1;
-
         }
 
 
@@ -203,6 +201,34 @@
 
 
         .home-logout:hover {
+            color: #E0D7D4;
+        }
+
+
+        /* ============================== */
+        /* IMAGE HERO */
+        /* ============================== */
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+
+            background-image: url('/images/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            align-items: flex-end;
+
+            padding: 0 35px 60px 35px;
+        }
+
+
+        .hero h1 {
+            margin: 0;
+
             color: #E0D7D4;
         }
 
@@ -314,10 +340,10 @@
 
 
         {{-- ============================== --}}
-        {{-- GRAND TITRE --}}
+        {{-- GRAND TITRE + IMAGE HERO --}}
         {{-- ============================== --}}
 
-        <section>
+        <section class="hero">
 
             <h1>
                 BEYOND<br>
