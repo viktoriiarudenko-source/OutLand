@@ -67,6 +67,12 @@ Route::post(
 // SAVED EXPERIENCES / FAVORIS
 // ==============================
 
+// Afficher les expériences enregistrées de l'utilisateur connecté
+Route::get(
+    '/saved-experiences',
+    [SavedExperienceController::class, 'index']
+)->middleware('auth');
+
 // Enregistrer une expérience dans les favoris
 Route::post(
     '/experiences/{experienceId}/save',
