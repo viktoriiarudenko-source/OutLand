@@ -6,7 +6,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>OutLand</title>
+
+    <style>
+
+        /* ============================== */
+        /* BASE */
+        /* ============================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+
+        /* ============================== */
+        /* HEADER */
+        /* ============================== */
+
+        .home-header {
+            width: 100%;
+            height: 74px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 35px;
+
+            background-color: #182123;
+        }
+
+
+        .home-nav {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+        }
+
+
+        /* ============================== */
+        /* LOGO OUTLAND */
+        /* ============================== */
+
+        .home-logo {
+            margin-right: 50px;
+
+            color: transparent;
+
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
+
+            font-family: Arial, sans-serif;
+            font-size: 29px;
+            font-weight: 400;
+
+            letter-spacing: 0.5px;
+
+            text-decoration: none;
+        }
+
+
+        /* ============================== */
+        /* LIENS DU HEADER */
+        /* ============================== */
+
+        .home-nav-links {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 42px;
+        }
+
+
+        .home-nav-links a {
+            color: rgba(255, 255, 255, 0.82);
+
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+
+            text-decoration: none;
+        }
+
+
+        .home-nav-links a:hover {
+            color: white;
+        }
+
+
+        /* ============================== */
+        /* ME CONNECTER */
+        /* ============================== */
+
+        .home-login {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        /* PETIT CARRÉ AVEC FLÈCHE */
+
+        .home-login::after {
+            content: "→";
+
+            width: 21px;
+            height: 21px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 2px;
+
+            color: white;
+
+            font-size: 14px;
+            line-height: 1;
+        }
+
+
+        /* ============================== */
+        /* DÉCONNEXION */
+        /* ============================== */
+
+        .home-nav form {
+            margin: 0 0 0 auto;
+        }
+
+
+        .home-logout {
+            color: rgba(255, 255, 255, 0.82);
+
+            background: transparent;
+
+            border: none;
+
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+
+            cursor: pointer;
+        }
+
+
+        .home-logout:hover {
+            color: white;
+        }
+
+
+    </style>
+
 </head>
+
 
 <body>
 
@@ -15,70 +180,91 @@
     {{-- HEADER --}}
     {{-- ============================== --}}
 
-    <header>
+    <header class="home-header">
 
-        <nav>
+        <nav class="home-nav">
+
 
             {{-- LOGO --}}
-            <a href="/">
+            <a href="/" class="home-logo">
                 OutLand
             </a>
 
 
-            {{-- MON VOYAGE --}}
-            @auth
-
-                <a href="/dashboard">
-                    Mon Voyage
-                </a>
-
-            @else
-
-                <a href="{{ route('login') }}">
-                    Mon Voyage
-                </a>
-
-            @endauth
+            {{-- NAVIGATION --}}
+            <div class="home-nav-links">
 
 
-            {{-- EXPLORER --}}
-            <a href="/destinations">
-                Explorer
-            </a>
+                {{-- MON VOYAGE --}}
+                @auth
 
-
-            {{-- CONNEXION / DÉCONNEXION --}}
-            @auth
-
-                {{-- Lien administration uniquement pour l'admin --}}
-                @if (auth()->user()->is_admin)
-
-                    <a href="/admin/destinations">
-                        Administration
+                    <a href="/dashboard">
+                        Mon Voyage
                     </a>
 
-                @endif
+                @else
+
+                    <a href="{{ route('login') }}">
+                        Mon Voyage
+                    </a>
+
+                @endauth
 
 
-                <form
-                    method="POST"
-                    action="{{ route('logout') }}"
-                    style="display: inline;"
-                >
-                    @csrf
-
-                    <button type="submit">
-                        Déconnexion
-                    </button>
-                </form>
-
-            @else
-
-                <a href="{{ route('login') }}">
-                    Me Connecter
+                {{-- EXPLORER --}}
+                <a href="/destinations">
+                    Explorer
                 </a>
 
-            @endauth
+
+                {{-- UTILISATEUR CONNECTÉ --}}
+                @auth
+
+
+                    {{-- ADMIN --}}
+                    @if (auth()->user()->is_admin)
+
+                        <a href="/admin/destinations">
+                            Administration
+                        </a>
+
+                    @endif
+
+
+                    {{-- DÉCONNEXION --}}
+                    <form
+                        method="POST"
+                        action="{{ route('logout') }}"
+                    >
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="home-logout"
+                        >
+                            Déconnexion
+                        </button>
+
+                    </form>
+
+
+                @else
+
+
+                    {{-- CONNEXION --}}
+                    <a
+                        href="{{ route('login') }}"
+                        class="home-login"
+                    >
+                        Me Connecter
+                    </a>
+
+
+                @endauth
+
+
+            </div>
 
         </nav>
 
@@ -132,7 +318,6 @@
 
                 @else
 
-                    {{-- UTILISATEUR NON CONNECTÉ --}}
                     <a href="{{ route('login') }}">
                         Mon Voyage
                     </a>
@@ -167,7 +352,8 @@
 
                     <div>
 
-                        {{-- IMAGE DE LA DESTINATION --}}
+
+                        {{-- IMAGE --}}
                         @if ($destination->image)
 
                             <a href="/destinations/{{ $destination->id }}">
@@ -183,15 +369,17 @@
                         @endif
 
 
-                        {{-- NOM DE LA DESTINATION --}}
+                        {{-- NOM --}}
                         <h3>
                             {{ $destination->name }}
                         </h3>
 
 
+                        {{-- LIEN --}}
                         <a href="/destinations/{{ $destination->id }}">
                             Découvrir
                         </a>
+
 
                     </div>
 
@@ -200,7 +388,7 @@
             </div>
 
 
-            {{-- VOIR TOUTES LES DESTINATIONS --}}
+            {{-- VOIR PLUS --}}
             <a href="/destinations">
                 Voir plus
             </a>
@@ -210,7 +398,7 @@
 
 
         {{-- ============================== --}}
-        {{-- DEUXIÈME CARTE EXPLICATIVE --}}
+        {{-- DEUXIÈME CARTE --}}
         {{-- ============================== --}}
 
         <section>
@@ -253,13 +441,16 @@
                 OutLand
             </p>
 
+
             <a href="/">
                 Accueil
             </a>
 
+
             <a href="/destinations">
                 Explorer
             </a>
+
 
             @auth
 
@@ -276,6 +467,7 @@
             @endauth
 
         </div>
+
 
         <p>
             © {{ date('Y') }} OutLand
