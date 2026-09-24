@@ -35,7 +35,7 @@
 
         .explorer-title {
             margin: 0;
-            font-family: Georgia, serif;
+            font-family: Playfair Display, serif;
             font-size: clamp(56px, 10vw, 105px);
             font-weight: 400;
             letter-spacing: 0.03em;
