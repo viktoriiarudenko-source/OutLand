@@ -37,6 +37,7 @@
                         ->isNotEmpty();
                 @endphp
 
+
                 @if ($isSaved)
 
                     <form action="/experiences/{{ $experience->id }}/save" method="POST">
@@ -55,6 +56,20 @@
 
                         <button type="submit">
                             ♡ Enregistrer
+                        </button>
+                    </form>
+
+                @endif
+
+
+                @if ($experience->user_id === auth()->id())
+
+                    <form action="/experiences/{{ $experience->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">
+                            Supprimer mon commentaire
                         </button>
                     </form>
 

@@ -62,6 +62,12 @@ Route::post(
     [ExperienceController::class, 'store']
 )->middleware('auth');
 
+// Supprimer une expérience
+Route::delete(
+    '/experiences/{id}',
+    [ExperienceController::class, 'destroy']
+)->middleware('auth');
+
 
 // ==============================
 // SAVED EXPERIENCES / FAVORIS
