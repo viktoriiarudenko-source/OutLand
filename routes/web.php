@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // HOME PAGE
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DestinationController::class, 'home']);
 
 
 // ==============================
@@ -49,6 +47,12 @@ Route::get('/destinations/{id}', [DestinationController::class, 'show']);
 // ==============================
 // EXPERIENCES
 // ==============================
+
+// Afficher les expériences publiées par l'utilisateur connecté
+Route::get(
+    '/my-experiences',
+    [ExperienceController::class, 'myExperiences']
+)->middleware('auth');
 
 // Show experience creation form
 Route::get(
