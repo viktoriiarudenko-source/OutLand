@@ -13,4 +13,27 @@ class DestinationController extends Controller
 
         return view('admin.destinations.index', compact('destinations'));
     }
+
+    public function create()
+    {
+        return view('admin.destinations.create');
+    }
+
+    public function store()
+    {
+        Destination::create([
+            'name' => request('name'),
+            'image' => request('image'),
+            'description' => request('description'),
+        ]);
+
+        return redirect('/admin/destinations');
+    }
+
+    public function edit($id)
+    {
+        $destination = Destination::findOrFail($id);
+
+        return view('admin.destinations.edit', compact('destination'));
+    }
 }
