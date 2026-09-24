@@ -36,4 +36,16 @@ class DestinationController extends Controller
 
         return view('admin.destinations.edit', compact('destination'));
     }
+    public function update($id)
+{
+    $destination = Destination::findOrFail($id);
+
+    $destination->update([
+        'name' => request('name'),
+        'image' => request('image'),
+        'description' => request('description'),
+    ]);
+
+    return redirect('/admin/destinations');
+}
 }
