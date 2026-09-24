@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // HOME PAGE
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DestinationController::class, 'home']);
 
 
 // ==============================

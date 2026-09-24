@@ -7,6 +7,17 @@ use App\Models\Experience;
 
 class DestinationController extends Controller
 {
+    // PAGE D'ACCUEIL
+    public function home()
+    {
+        // Récupère quelques destinations pour les présenter sur l'accueil
+        $destinations = Destination::take(3)->get();
+
+        return view('welcome', compact('destinations'));
+    }
+
+
+    // PAGE EXPLORER
     public function index()
     {
         $destinations = Destination::all();
@@ -15,6 +26,7 @@ class DestinationController extends Controller
     }
 
 
+    // PAGE D'UNE DESTINATION
     public function show($id)
     {
         // Récupère le pays
