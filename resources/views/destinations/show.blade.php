@@ -1,61 +1,35 @@
 <x-app-layout>
 
-
     <div>
 
-       <div class="destination-hero">
-    @if ($destination->image)
-        <img
-            src="{{ asset('storage/' . $destination->image) }}"
-            alt="{{ $destination->name }}"
-        >
-    @endif
+        <div class="destination-hero">
 
-    <div class="destination-hero-overlay">
-        <h1>{{ $destination->name }}</h1>
-    </div>
-</div>
+            @if ($destination->image)
 
-<div class="destination-description">
-    <p>{{ $destination->description }}</p>
-</div>
+                <img
+                    src="{{ asset('storage/' . $destination->image) }}"
+                    alt="{{ $destination->name }}"
+                >
 
+            @endif
 
-        {{-- NOTE MOYENNE DE LA DESTINATION --}}
+            <div class="destination-hero-overlay">
 
-        @if ($averageRating)
+                <h1>{{ $destination->name }}</h1>
 
-            <div>
-                <h2>
-                    Note moyenne :
-
-                   @for ($i = 1; $i <= 5; $i++)
-
-                        @if ($i <= round($averageRating))
-                            ★
-                        @else
-                            ☆
-                        @endif
-
-                    @endfor
-
-                    {{ number_format($averageRating, 1, ',', ' ') }}/5
-                </h2>
-
-                <p>
-                    {{ $experiences->whereNotNull('rating')->count() }}
-                    avis
-                </p>
             </div>
 
-        @else
-
-            <p>Pas encore de note pour cette destination.</p>
-
-        @endif
+        </div>
 
 
-        <h2>Commentaires</h2>
+        <div class="destination-description">
+
+            <p>{{ $destination->description }}</p>
+
+        </div>
+
+<h2 class="comments-title">Commentaires</h2>
+
 
         @if ($experiences->isEmpty())
 
@@ -65,7 +39,7 @@
 
             @foreach ($experiences as $experience)
 
-                <div>
+                <article class="experience-card">
 
                     <h3>{{ $experience->title }}</h3>
 
@@ -75,32 +49,41 @@
 
 
                     {{-- NOTE DU COMMENTAIRE --}}
+
                     @if ($experience->rating)
 
                         <p>
+
                             @for ($i = 1; $i <= 5; $i++)
 
                                 @if ($i <= $experience->rating)
+
                                     ★
+
                                 @else
+
                                     ☆
+
                                 @endif
 
                             @endfor
 
                             {{ $experience->rating }}/5
+
                         </p>
 
                     @endif
 
 
                     {{-- TEXTE --}}
+
                     <p>
                         {{ $experience->content }}
                     </p>
 
 
                     {{-- PHOTO --}}
+
                     @if ($experience->photo)
 
                         <img
@@ -113,28 +96,35 @@
 
 
                     {{-- UTILISATEUR CONNECTÉ --}}
+
                     @auth
 
                         @php
+
                             $isSaved = $experience->savedExperiences
                                 ->where('user_id', auth()->id())
                                 ->isNotEmpty();
+
                         @endphp
 
 
                         {{-- ENREGISTREMENT --}}
+
                         @if ($isSaved)
 
                             <form
                                 action="/experiences/{{ $experience->id }}/save"
                                 method="POST"
                             >
+
                                 @csrf
+
                                 @method('DELETE')
 
                                 <button type="submit">
                                     ♥ Enregistré — Retirer
                                 </button>
+
                             </form>
 
                         @else
@@ -143,62 +133,72 @@
                                 action="/experiences/{{ $experience->id }}/save"
                                 method="POST"
                             >
+
                                 @csrf
 
                                 <button type="submit">
                                     ♡ Enregistrer
                                 </button>
+
                             </form>
 
                         @endif
 
 
                         {{-- MODIFICATION / SUPPRESSION PAR L'AUTEUR --}}
+
                         @if ($experience->user_id === auth()->id())
 
                             <a href="/experiences/{{ $experience->id }}/edit">
                                 Modifier mon commentaire
                             </a>
 
+
                             <form
                                 action="/experiences/{{ $experience->id }}"
                                 method="POST"
                             >
+
                                 @csrf
+
                                 @method('DELETE')
 
                                 <button type="submit">
                                     Supprimer mon commentaire
                                 </button>
+
                             </form>
 
                         @endif
 
                     @endauth
 
-                </div>
-
-                <hr>
+                </article>
 
             @endforeach
 
         @endif
 
 
-        {{-- AJOUTER UNE EXPÉRIENCE --}}
-        <a href="/destinations/{{ $destination->id }}/experiences/create">
-            Ajouter un commentaire
-        </a>
+      {{-- AJOUTER UNE EXPÉRIENCE --}}
+
+<a href="/destinations/{{ $destination->id }}/experiences/create">
+    Ajouter un commentaire
+</a>
+
+
+<h2 class="comments-title">Commentaires</h2>
 
 
         <br>
 
 
         {{-- RETOUR EXPLORER --}}
+
         <a href="/destinations">
             ← Retour aux destinations
         </a>
 
     </div>
 
-</x-app-layout>
+</x-app-layout> 
