@@ -44,4 +44,25 @@ class ExperienceController extends Controller
         // Retourne sur la page du pays
         return redirect('/destinations/' . $destinationId);
     }
+
+    // Supprime un commentaire
+    public function destroy($id)
+    {
+        // Récupère le commentaire dans la BDD
+        $experience = Experience::findOrFail($id);
+
+        // Vérifie que l'utilisateur connecté est bien l'auteur
+        if ($experience->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // Récupère l'ID de la destination avant la suppression
+        $destinationId = $experience->destination_id;
+
+        // Supprime le commentaire
+        $experience->delete();
+
+        // Retourne sur la page du pays
+        return redirect('/destinations/' . $destinationId);
+    }
 }
