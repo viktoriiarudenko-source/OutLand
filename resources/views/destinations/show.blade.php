@@ -11,6 +11,40 @@
 <p>{{ $destination->description }}</p>
 
 
+{{-- NOTE MOYENNE DE LA DESTINATION --}}
+
+@if ($averageRating)
+
+    <div>
+        <h2>
+            Note moyenne :
+
+            @for ($i = 1; $i <= 5; $i++)
+
+                @if ($i <= round($averageRating))
+                    ★
+                @else
+                    ☆
+                @endif
+
+            @endfor
+
+            {{ number_format($averageRating, 1, ',', ' ') }}/5
+        </h2>
+
+        <p>
+            {{ $experiences->whereNotNull('rating')->count() }}
+            avis
+        </p>
+    </div>
+
+@else
+
+    <p>Pas encore de note pour cette destination.</p>
+
+@endif
+
+
 <h2>Commentaires</h2>
 
 @if ($experiences->isEmpty())
@@ -49,7 +83,10 @@
             <p>{{ $experience->content }}</p>
 
             @if ($experience->photo)
-                <img src="{{ asset('storage/' . $experience->photo) }}" width="300">
+                <img
+                    src="{{ asset('storage/' . $experience->photo) }}"
+                    width="300"
+                >
             @endif
 
 
