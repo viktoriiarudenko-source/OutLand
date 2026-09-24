@@ -1,17 +1,48 @@
 <x-app-layout>
+
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+        <h2>
+            Mon Voyage
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+
+    <div>
+
+        <h1>Mon Voyage</h1>
+
+        <p>
+            Retrouvez ici vos expériences et vos prochains voyages.
+        </p>
+
+
+        {{-- CARTE : EXPÉRIENCES POSTÉES --}}
+        <div>
+
+            <h2>Expériences postées</h2>
+
+            <p>
+                Retrouvez toutes les expériences que vous avez partagées.
+            </p>
+
+            <a href="/my-experiences">
+                Voir mes expériences
+            </a>
+
         </div>
+
+
+        {{-- CARTE : À VENIR --}}
+        <div>
+
+            <h2>À venir</h2>
+
+            <p>
+                Cette fonctionnalité sera disponible prochainement.
+            </p>
+
+        </div>
+
     </div>
+
 </x-app-layout>
