@@ -48,4 +48,12 @@ class DestinationController extends Controller
 
     return redirect('/admin/destinations');
 }
+public function destroy($id)
+{
+    $destination = Destination::findOrFail($id);
+
+    $destination->delete();
+
+    return redirect('/admin/destinations');
+}
 }
