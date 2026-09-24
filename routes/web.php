@@ -7,14 +7,14 @@ use App\Http\Controllers\Admin\DestinationController as AdminDestinationControll
 use Illuminate\Support\Facades\Route;
 
 
-// PAGE D'ACCUEIL
+// HOME PAGE
 Route::get('/', function () {
     return view('welcome');
 });
 
 
 // ==============================
-// AUTHENTIFICATION / PROFIL
+// AUTHENTICATION / PROFILE
 // ==============================
 
 Route::get('/dashboard', function () {
@@ -38,24 +38,24 @@ Route::middleware('auth')->group(function () {
 // DESTINATIONS
 // ==============================
 
-// Afficher tous les pays
+// Show all destinations
 Route::get('/destinations', [DestinationController::class, 'index']);
 
-// Afficher un pays + ses commentaires
+// Show one destination and its experiences
 Route::get('/destinations/{id}', [DestinationController::class, 'show']);
 
 
 // ==============================
-// COMMENTAIRES / EXPERIENCES
+// EXPERIENCES
 // ==============================
 
-// Formulaire pour ajouter un commentaire
+// Show experience creation form
 Route::get(
     '/destinations/{destinationId}/experiences/create',
     [ExperienceController::class, 'create']
 );
 
-// Enregistrer le commentaire
+// Store experience
 Route::post(
     '/destinations/{destinationId}/experiences',
     [ExperienceController::class, 'store']
@@ -66,39 +66,48 @@ Route::post(
 // ADMIN - DESTINATIONS
 // ==============================
 
-// Liste des destinations
-Route::get(
-    '/admin/destinations',
-    [AdminDestinationController::class, 'index']
-);
+Route::middleware('auth')->group(function () {
 
-// Formulaire création
-Route::get(
-    '/admin/destinations/create',
-    [AdminDestinationController::class, 'create']
-);
+    // List destinations
+    Route::get(
+        '/admin/destinations',
+        [AdminDestinationController::class, 'index']
+    );
 
-// Enregistrer une destination
-Route::post(
-    '/admin/destinations',
-    [AdminDestinationController::class, 'store']
-);
+    // Create destination form
+    Route::get(
+        '/admin/destinations/create',
+        [AdminDestinationController::class, 'create']
+    );
 
-// Formulaire modification
-Route::get(
-    '/admin/destinations/{id}/edit',
-    [AdminDestinationController::class, 'edit']
-);
+    // Store destination
+    Route::post(
+        '/admin/destinations',
+        [AdminDestinationController::class, 'store']
+    );
 
-// Modifier une destination
-Route::post(
-    '/admin/destinations/{id}',
-    [AdminDestinationController::class, 'update']
-);
+    // Edit destination form
+    Route::get(
+        '/admin/destinations/{id}/edit',
+        [AdminDestinationController::class, 'edit']
+    );
+
+    // Update destination
+    Route::post(
+        '/admin/destinations/{id}',
+        [AdminDestinationController::class, 'update']
+    );
+
+    // Delete destination
+    Route::delete(
+        '/admin/destinations/{id}',
+        [AdminDestinationController::class, 'destroy']
+    );
+});
 
 
 // ==============================
-// ROUTES D'AUTHENTIFICATION
+// AUTHENTICATION ROUTES
 // ==============================
 
 require __DIR__.'/auth.php';
