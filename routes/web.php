@@ -62,6 +62,18 @@ Route::post(
     [ExperienceController::class, 'store']
 )->middleware('auth');
 
+// Show experience edit form
+Route::get(
+    '/experiences/{id}/edit',
+    [ExperienceController::class, 'edit']
+)->middleware('auth');
+
+// Update experience
+Route::patch(
+    '/experiences/{id}',
+    [ExperienceController::class, 'update']
+)->middleware('auth');
+
 // Supprimer une expérience
 Route::delete(
     '/experiences/{id}',

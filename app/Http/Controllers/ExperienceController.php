@@ -45,6 +45,55 @@ class ExperienceController extends Controller
         return redirect('/destinations/' . $destinationId);
     }
 
+    // Affiche le formulaire pour modifier un commentaire
+    public function edit($id)
+    {
+        // Récupère le commentaire dans la BDD
+        $experience = Experience::findOrFail($id);
+
+        // Vérifie que l'utilisateur connecté est bien l'auteur
+        if ($experience->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // Affiche le formulaire de modification
+        return view('experiences.edit', compact('experience'));
+    }
+
+    // Modifie un commentaire
+    public function update(Request $request, $id)
+    {
+        // Récupère le commentaire dans la BDD
+        $experience = Experience::findOrFail($id);
+
+        // Vérifie que l'utilisateur connecté est bien l'auteur
+        if ($experience->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // Vérifie les nouvelles informations
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'photo' => 'nullable|image|max:2048',
+        ]);
+
+        // Modifie le titre et le contenu
+        $experience->title = $request->title;
+        $experience->content = $request->content;
+
+        // Si une nouvelle photo est ajoutée, remplace l'ancienne
+        if ($request->hasFile('photo')) {
+            $experience->photo = $request->file('photo')->store('experiences', 'public');
+        }
+
+        // Enregistre les modifications
+        $experience->save();
+
+        // Retourne sur la page du pays
+        return redirect('/destinations/' . $experience->destination_id);
+    }
+
     // Supprime un commentaire
     public function destroy($id)
     {
