@@ -42,6 +42,35 @@
 
 
         <div>
+            <label for="rating">Note</label>
+
+            <select id="rating" name="rating" required>
+
+                <option value="1" {{ $experience->rating == 1 ? 'selected' : '' }}>
+                    ★☆☆☆☆ - 1/5
+                </option>
+
+                <option value="2" {{ $experience->rating == 2 ? 'selected' : '' }}>
+                    ★★☆☆☆ - 2/5
+                </option>
+
+                <option value="3" {{ $experience->rating == 3 ? 'selected' : '' }}>
+                    ★★★☆☆ - 3/5
+                </option>
+
+                <option value="4" {{ $experience->rating == 4 ? 'selected' : '' }}>
+                    ★★★★☆ - 4/5
+                </option>
+
+                <option value="5" {{ $experience->rating == 5 ? 'selected' : '' }}>
+                    ★★★★★ - 5/5
+                </option>
+
+            </select>
+        </div>
+
+
+        <div>
             <p>Photo actuelle :</p>
 
             @if ($experience->photo)

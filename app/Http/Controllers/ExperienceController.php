@@ -20,6 +20,7 @@ class ExperienceController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
             'photo' => 'nullable|image|max:2048',
         ]);
 
@@ -28,6 +29,9 @@ class ExperienceController extends Controller
         $experience->destination_id = $destinationId;
         $experience->title = $request->title;
         $experience->content = $request->content;
+
+        // Enregistre la note sur 5
+        $experience->rating = $request->rating;
 
         // Enregistre la photo si une photo a été ajoutée
         if ($request->hasFile('photo')) {
@@ -75,12 +79,14 @@ class ExperienceController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
             'photo' => 'nullable|image|max:2048',
         ]);
 
-        // Modifie le titre et le contenu
+        // Modifie le titre, le contenu et la note
         $experience->title = $request->title;
         $experience->content = $request->content;
+        $experience->rating = $request->rating;
 
         // Si une nouvelle photo est ajoutée, remplace l'ancienne
         if ($request->hasFile('photo')) {

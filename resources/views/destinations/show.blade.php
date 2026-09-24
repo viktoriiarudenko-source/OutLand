@@ -26,6 +26,26 @@
 
             <p>Publié par : {{ $experience->user->name }}</p>
 
+
+            @if ($experience->rating)
+
+                <p>
+                    @for ($i = 1; $i <= 5; $i++)
+
+                        @if ($i <= $experience->rating)
+                            ★
+                        @else
+                            ☆
+                        @endif
+
+                    @endfor
+
+                    {{ $experience->rating }}/5
+                </p>
+
+            @endif
+
+
             <p>{{ $experience->content }}</p>
 
             @if ($experience->photo)
@@ -94,4 +114,4 @@
 
 <a href="/destinations/{{ $destination->id }}/experiences/create">
     Ajouter un commentaire
-</a> 
+</a>

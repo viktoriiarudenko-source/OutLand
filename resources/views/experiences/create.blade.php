@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +25,21 @@
             <textarea id="content" name="content"></textarea>
         </div>
 
+
+        <div>
+            <label for="rating">Note</label>
+
+            <select id="rating" name="rating">
+                <option value="">Choisir une note</option>
+                <option value="1">★☆☆☆☆ - 1/5</option>
+                <option value="2">★★☆☆☆ - 2/5</option>
+                <option value="3">★★★☆☆ - 3/5</option>
+                <option value="4">★★★★☆ - 4/5</option>
+                <option value="5">★★★★★ - 5/5</option>
+            </select>
+        </div>
+
+
         <div>
             <label for="photo">Ajouter une photo</label>
             <input type="file" id="photo" name="photo">
@@ -34,4 +50,5 @@
     </form>
 
 </body>
+
 </html>
