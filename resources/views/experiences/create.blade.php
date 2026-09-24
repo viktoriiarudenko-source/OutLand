@@ -10,7 +10,9 @@
 
     <h1>Ajouter un commentaire</h1>
 
-    <form>
+    <form action="/destinations/{{ $destinationId }}/experiences" method="POST" enctype="multipart/form-data">
+
+        @csrf
         
         <div>
             <label for="title">Titre</label>
