@@ -37,15 +37,14 @@
 
                 <h2>{{ $destination->name }}</h2>
 
-                @if ($destination->image)
+               @if ($destination->image)
+<img
+    src="{{ asset('storage/' . $destination->image) }}"
+    alt="{{ $destination->name }}"
+    width="300"
+>
 
-                    <img
-                        src="{{ asset('storage/' . $destination->image) }}"
-                        alt="{{ $destination->name }}"
-                        width="300"
-                    >
-
-                @endif
+@endif
 
                 <br>
 
