@@ -7,16 +7,20 @@
 
     <title>OutLand</title>
 
-    <!-- Poppins -->
+    <!-- TYPOGRAPHIES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
 
-        /* =========================
+        /* =====================================================
            BASE
-        ========================= */
+        ===================================================== */
 
         * {
             box-sizing: border-box;
@@ -33,183 +37,131 @@
         body {
             background: #071214;
             color: #E0D7D4;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
 
-        /* =========================
+        /* =====================================================
            FOND DE TOUTE LA PAGE
-        ========================= */
+        ===================================================== */
 
-       .home-page {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-color: #071214;
-}
+        .home-page {
+            position: relative;
 
-.home-page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image: url('/images/hero.png');
-    background-size: 100% 100%;
-    background-position: top center;
-    background-repeat: no-repeat;
-
-    opacity: 0.40;
-
-    z-index: 0;
-}
-
-.home-header,
-main,
-footer {
-    position: relative;
-    z-index: 1;
-}
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .home-header {
             width: 100%;
+            min-height: 100vh;
+
+            background-color: #071214;
+        }
+
+        .home-page::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image: url('/images/hero.png');
+            background-size: 100% 100%;
+            background-position: top center;
+            background-repeat: no-repeat;
+
+            opacity: 0.40;
+
+            z-index: 0;
+        }
+
+        .page-header,
+        main,
+        .page-footer {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .page-header {
+            width: calc(100% - 70px);
             height: 90px;
 
-            padding: 0 35px;
-
-            background: transparent;
-        }
-
-        .home-nav {
-            width: 100%;
-            height: 100%;
+            margin: 0 35px;
 
             display: flex;
             align-items: center;
 
-            border-bottom: 1px solid rgba(224, 215, 212, 0.65);
+            border-bottom: 1px solid rgba(224, 215, 212, 0.55);
         }
 
-
-        /* =========================
-           LOGO
-        ========================= */
-
-        .home-logo {
-            flex-shrink: 0;
-
+        .logo {
             margin-right: 70px;
 
-            font-family: Arial, sans-serif;
-            font-size: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 29px;
             font-weight: 400;
 
             color: #E0D7D4;
-
-            text-decoration: none;
         }
 
-
-        /* =========================
-           NAVIGATION
-        ========================= */
-
-        .home-nav-links {
+        .navigation {
             width: 100%;
 
             display: flex;
             align-items: center;
 
-            gap: 65px;
+            gap: 60px;
         }
 
-        .home-nav-links a {
+        .navigation a {
             font-family: 'Poppins', sans-serif;
 
-            font-size: 25px;
-            font-weight: 400;
-
-            letter-spacing: -0.06em;
-
-            color: rgba(224, 215, 212, 0.83);
-
-            text-decoration: none;
-        }
-
-        .home-nav-links a:hover {
-            color: #E0D7D4;
-        }
-
-
-        /* =========================
-           CONNEXION
-        ========================= */
-
-        .home-login {
-            margin-left: auto;
-
-            display: flex;
-            align-items: center;
-
-            gap: 14px;
-        }
-
-        .home-login::after {
-            content: "→";
-
-            width: 25px;
-            height: 25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border: 1px solid rgba(224, 215, 212, 0.83);
-
-            border-radius: 2px;
-
-            color: rgba(224, 215, 212, 0.83);
-
             font-size: 16px;
+            font-weight: 300;
+
+            color: rgba(224, 215, 212, 0.90);
         }
 
-
-        /* =========================
-           DECONNEXION
-        ========================= */
-
-        .home-nav form {
-            margin: 0 0 0 auto;
+        .navigation a:hover {
+            opacity: .7;
         }
 
-        .home-logout {
+        .logout-form {
+            margin-left: auto;
+        }
+
+        .logout-button {
             padding: 0;
 
             border: none;
             background: transparent;
 
             font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
 
-            font-size: 25px;
-            font-weight: 400;
-
-            letter-spacing: -0.06em;
-
-            color: rgba(224, 215, 212, 0.83);
+            color: rgba(224, 215, 212, 0.90);
 
             cursor: pointer;
         }
 
-        .home-logout:hover {
-            color: #E0D7D4;
+        .logout-button:hover {
+            opacity: .7;
+        }
+
+        .login-link {
+            margin-left: auto;
         }
 
 
-        /* =========================
+        /* =====================================================
            HERO
-        ========================= */
+        ===================================================== */
 
         .hero {
             width: 100%;
@@ -227,13 +179,12 @@ footer {
         .hero-title {
             margin: 0;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 90px;
             font-weight: 400;
 
             line-height: 0.92;
-
             letter-spacing: -0.04em;
 
             text-align: center;
@@ -242,9 +193,9 @@ footer {
         }
 
 
-        /* =========================
+        /* =====================================================
            SECTIONS
-        ========================= */
+        ===================================================== */
 
         .home-section {
             width: 100%;
@@ -256,6 +207,9 @@ footer {
 
         .home-section h2 {
             margin-top: 0;
+
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
 
             color: #E0D7D4;
         }
@@ -269,9 +223,9 @@ footer {
         }
 
 
-        /* =========================
-           INTRO
-        ========================= */
+        /* =====================================================
+           INTRODUCTION
+        ===================================================== */
 
         .intro-card {
             max-width: 1000px;
@@ -290,10 +244,14 @@ footer {
         }
 
         .intro-card h2 {
-            font-family: Georgia, 'Times New Roman', serif;
+            margin-bottom: 0;
+
+            font-family: 'Playfair Display', serif;
 
             font-size: 42px;
             font-weight: 400;
+
+            line-height: 1.15;
         }
 
         .intro-card p {
@@ -302,6 +260,9 @@ footer {
             margin: 20px auto 30px;
 
             font-family: 'Poppins', sans-serif;
+
+            font-size: 15px;
+            font-weight: 300;
 
             line-height: 1.7;
         }
@@ -331,9 +292,9 @@ footer {
         }
 
 
-        /* =========================
+        /* =====================================================
            DESTINATIONS
-        ========================= */
+        ===================================================== */
 
         .destinations-section {
             text-align: center;
@@ -342,12 +303,12 @@ footer {
         .destinations-title {
             margin-bottom: 50px;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 52px;
             font-weight: 400;
 
-            line-height: 1;
+            line-height: 1.05;
 
             text-align: center;
         }
@@ -384,6 +345,27 @@ footer {
             object-fit: cover;
 
             display: block;
+
+            transition: transform .4s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.025);
+        }
+
+        .destination-card::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, .40),
+                transparent 60%
+            );
+
+            pointer-events: none;
         }
 
         .destination-name {
@@ -392,9 +374,11 @@ footer {
             left: 35px;
             bottom: 25px;
 
+            z-index: 2;
+
             margin: 0;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 36px;
             font-weight: 400;
@@ -418,22 +402,32 @@ footer {
             font-family: 'Poppins', sans-serif;
 
             text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+        .see-more:hover,
+        .main-button:hover {
+            background: #E0D7D4;
+            color: #071214;
         }
 
 
-        /* =========================
-           OUTLAND
-        ========================= */
+        /* =====================================================
+           GRAND TITRE OUTLAND
+        ===================================================== */
 
         .outland-big-title {
             margin: 60px 0;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 110px;
             font-weight: 400;
 
             line-height: 1;
+
+            letter-spacing: -0.03em;
 
             text-align: center;
 
@@ -441,9 +435,9 @@ footer {
         }
 
 
-        /* =========================
-           DERNIERE CARTE
-        ========================= */
+        /* =====================================================
+           FONCTIONNALITES
+        ===================================================== */
 
         .features-card {
             max-width: 1100px;
@@ -462,10 +456,12 @@ footer {
         .features-card h2 {
             margin-bottom: 40px;
 
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 42px;
             font-weight: 400;
+
+            line-height: 1.15;
 
             text-align: center;
         }
@@ -483,7 +479,7 @@ footer {
         }
 
         .feature h3 {
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
 
             font-size: 27px;
             font-weight: 400;
@@ -492,76 +488,77 @@ footer {
         .feature p {
             font-family: 'Poppins', sans-serif;
 
+            font-size: 14px;
+            font-weight: 300;
+
             line-height: 1.7;
         }
 
 
-        /* =========================
+        /* =====================================================
            FOOTER
-        ========================= */
+        ===================================================== */
 
-        footer {
+        .page-footer {
             width: 100%;
 
-            padding: 80px 35px 30px;
+            padding: 30px 20px;
 
             background: transparent;
 
-            color: #E0D7D4;
-
             text-align: center;
+
+            color: rgba(224, 215, 212, .70);
+
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            font-weight: 300;
         }
 
         .footer-links {
             display: flex;
-            align-items: center;
             justify-content: center;
 
-            gap: 30px;
+            gap: 6px;
 
             flex-wrap: wrap;
-
-            margin-bottom: 25px;
         }
 
-        footer a {
-            font-family: 'Poppins', sans-serif;
-
-            color: #E0D7D4;
-
-            text-decoration: none;
+        .footer-links a {
+            color: rgba(224, 215, 212, .70);
         }
 
-        footer p {
-            font-family: 'Poppins', sans-serif;
-
-            font-size: 13px;
+        .footer-links a:hover {
+            text-decoration: underline;
         }
 
 
-        /* =========================
+        /* =====================================================
            RESPONSIVE
-        ========================= */
+        ===================================================== */
 
         @media (max-width: 900px) {
 
-            .home-header {
-                padding: 0 20px;
+            .page-header {
+                width: calc(100% - 30px);
+                height: 65px;
+
+                margin: 0 15px;
             }
 
-            .home-logo {
-                margin-right: 30px;
+            .logo {
+                margin-right: 25px;
 
-                font-size: 24px;
+                font-size: 21px;
             }
 
-            .home-nav-links {
+            .navigation {
                 gap: 20px;
             }
 
-            .home-nav-links a,
-            .home-logout {
-                font-size: 17px;
+            .navigation a,
+            .logout-button {
+                font-size: 11px;
             }
 
             .hero {
@@ -576,20 +573,45 @@ footer {
                 padding: 60px 20px;
             }
 
+            .intro-card {
+                padding: 35px 25px;
+            }
+
+            .intro-card h2 {
+                font-size: 34px;
+            }
+
             .destinations-title {
                 font-size: 40px;
+            }
+
+            .destination-card {
+                height: 200px;
+            }
+
+            .destination-name {
+                left: 25px;
+                bottom: 20px;
+
+                font-size: 30px;
             }
 
             .outland-big-title {
                 font-size: 70px;
             }
 
+            .features-card {
+                padding: 40px 25px;
+            }
+
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -598,71 +620,80 @@ footer {
 <div class="home-page">
 
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    {{-- ================================================= --}}
+    {{-- HEADER --}}
+    {{-- ================================================= --}}
 
-    <header class="home-header">
+    <header class="page-header">
 
-        <nav class="home-nav">
+        <a
+            href="/"
+            class="logo"
+        >
+            OutLand
+        </a>
 
-            <a href="/" class="home-logo">
-                OutLand
+
+        <nav class="navigation">
+
+            @auth
+
+                <a href="/dashboard">
+                    Mon Voyage
+                </a>
+
+            @else
+
+                <a href="{{ route('login') }}">
+                    Mon Voyage
+                </a>
+
+            @endauth
+
+
+            <a href="/destinations">
+                Explorer
             </a>
 
 
-            <div class="home-nav-links">
+            @auth
 
-                @auth
+                @if (auth()->user()->is_admin)
 
-                    <a href="/dashboard">
-                        Mon Voyage
+                    <a href="/admin/destinations">
+                        Administration
                     </a>
 
-                @else
-
-                    <a href="{{ route('login') }}">
-                        Mon Voyage
-                    </a>
-
-                @endauth
+                @endif
 
 
-                <a href="/destinations">
-                    Explorer
+                <form
+                    method="POST"
+                    action="{{ route('logout') }}"
+                    class="logout-form"
+                >
+
+                    @csrf
+
+                    <button
+                        type="submit"
+                        class="logout-button"
+                    >
+                        Déconnexion
+                    </button>
+
+                </form>
+
+            @else
+
+                <a
+                    href="{{ route('login') }}"
+                    class="login-link"
+                >
+                    Me Connecter
                 </a>
 
-
-                @auth
-
-                    @if (auth()->user()->is_admin)
-
-                        <a href="/admin/destinations">
-                            Administration
-                        </a>
-
-                    @endif
-
-
-                    <form method="POST" action="{{ route('logout') }}">
-
-                        @csrf
-
-                        <button type="submit" class="home-logout">
-                            Déconnexion
-                        </button>
-
-                    </form>
-
-                @else
-
-                    <a href="{{ route('login') }}" class="home-login">
-                        Me Connecter
-                    </a>
-
-                @endauth
-
-            </div>
+            @endauth
 
         </nav>
 
@@ -673,9 +704,9 @@ footer {
     <main>
 
 
-        <!-- =========================
-             BEYOND THE MAP
-        ========================== -->
+        {{-- ================================================= --}}
+        {{-- HERO --}}
+        {{-- ================================================= --}}
 
         <section class="hero">
 
@@ -688,9 +719,9 @@ footer {
 
 
 
-        <!-- =========================
-             INTRODUCTION
-        ========================== -->
+        {{-- ================================================= --}}
+        {{-- INTRODUCTION --}}
+        {{-- ================================================= --}}
 
         <section class="home-section">
 
@@ -713,15 +744,22 @@ footer {
 
                     @auth
 
-                        <a href="/dashboard" class="main-button">
+                        <a
+                            href="/dashboard"
+                            class="main-button"
+                        >
                             Mon Voyage
                         </a>
 
                     @else
 
-                        <a href="{{ route('login') }}" class="main-button">
+                        <a
+                            href="{{ route('login') }}"
+                            class="main-button"
+                        >
                             Mon Voyage
                         </a>
+
 
                         <a href="{{ route('register') }}">
                             Créer un compte
@@ -737,9 +775,9 @@ footer {
 
 
 
-        <!-- =========================
-             DESTINATIONS
-        ========================== -->
+        {{-- ================================================= --}}
+        {{-- DESTINATIONS --}}
+        {{-- ================================================= --}}
 
         <section class="home-section destinations-section">
 
@@ -779,7 +817,10 @@ footer {
             </div>
 
 
-            <a href="/destinations" class="see-more">
+            <a
+                href="/destinations"
+                class="see-more"
+            >
                 Voir Plus
             </a>
 
@@ -787,9 +828,9 @@ footer {
 
 
 
-        <!-- =========================
-             GROS TITRE OUTLAND
-        ========================== -->
+        {{-- ================================================= --}}
+        {{-- GRAND TITRE OUTLAND --}}
+        {{-- ================================================= --}}
 
         <section class="home-section">
 
@@ -801,9 +842,9 @@ footer {
 
 
 
-        <!-- =========================
-             FONCTIONNALITES
-        ========================== -->
+        {{-- ================================================= --}}
+        {{-- FONCTIONNALITES --}}
+        {{-- ================================================= --}}
 
         <section class="home-section">
 
@@ -816,6 +857,7 @@ footer {
 
 
                 <div class="features-grid">
+
 
                     <div class="feature">
 
@@ -846,52 +888,55 @@ footer {
 
                     </div>
 
+
                 </div>
 
             </div>
 
         </section>
 
+
     </main>
 
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    {{-- ================================================= --}}
+    {{-- FOOTER --}}
+    {{-- ================================================= --}}
 
-    <footer>
+    <footer class="page-footer">
 
         <div class="footer-links">
 
-            <a href="/">
-                Accueil
+            <span>
+                OUTLAND © {{ date('Y') }}
+            </span>
+
+            <span>•</span>
+
+            <a href="#">
+                Mentions Légales
             </a>
 
-            <a href="/destinations">
-                Explorer
+            <span>•</span>
+
+            <a href="#">
+                Politique De Confidentialité
             </a>
 
-            @auth
+            <span>•</span>
 
-                <a href="/dashboard">
-                    Mon Voyage
-                </a>
+            <a href="#">
+                Gestion Des Cookies
+            </a>
 
-            @else
+            <span>•</span>
 
-                <a href="{{ route('login') }}">
-                    Me connecter
-                </a>
-
-            @endauth
+            <a href="#">
+                Contact
+            </a>
 
         </div>
-
-
-        <p>
-            © {{ date('Y') }} OutLand
-        </p>
 
     </footer>
 
