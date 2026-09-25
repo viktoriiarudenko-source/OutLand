@@ -561,3 +561,4 @@ body:has(.guest-page) {
 body:has(.guest-page) .min-h-screen {
     background: #182528 !important;
 }
+
