@@ -807,25 +807,21 @@
 
                     {{-- ETOILES --}}
 
-                    @if ($experience->rating)
+                    <div class="author-rating">
 
-                        <div class="author-rating">
+    @for ($i = 1; $i <= 5; $i++)
 
-                            @for ($i = 1; $i <= 5; $i++)
+        <span class="star">
+            @if ($i <= ($experience->rating ?? 0))
+                ★
+            @else
+                ☆
+            @endif
+        </span>
 
-                                <span class="star">
-                                    @if ($i <= $experience->rating)
-                                        ★
-                                    @else
-                                        ☆
-                                    @endif
-                                </span>
+    @endfor
 
-                            @endfor
-
-                        </div>
-
-                    @endif
+</div>
 
                 </div>
 
