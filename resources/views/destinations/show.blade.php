@@ -28,7 +28,20 @@
 
         </div>
 
-<h2 class="comments-title">Commentaires</h2>
+
+        {{-- AJOUTER UNE EXPÉRIENCE --}}
+
+        <a
+            class="add-experience-button"
+            href="/destinations/{{ $destination->id }}/experiences/create"
+        >
+            Ajouter un commentaire
+        </a>
+
+
+        <h2 class="comments-title">
+            Commentaires
+        </h2>
 
 
         @if ($experiences->isEmpty())
@@ -179,26 +192,15 @@
 
         @endif
 
+{{-- RETOUR EXPLORER --}}
 
-      {{-- AJOUTER UNE EXPÉRIENCE --}}
-
-<a href="/destinations/{{ $destination->id }}/experiences/create">
-    Ajouter un commentaire
+<a
+    class="back-to-destinations"
+    href="/destinations"
+>
+    ← Retour aux destinations
 </a>
-
-
-<h2 class="comments-title">Commentaires</h2>
-
-
-        <br>
-
-
-        {{-- RETOUR EXPLORER --}}
-
-        <a href="/destinations">
-            ← Retour aux destinations
-        </a>
 
     </div>
 
-</x-app-layout> 
+</x-app-layout>
