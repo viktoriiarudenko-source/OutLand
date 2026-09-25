@@ -35,7 +35,7 @@
 
                     <p>
 
-                        @for ($i = 1; $i <= 5; $i)
+                        @for ($i = 1; $i <= 5; $i++)
 
                             @if ($i <= $savedExperience->experience->rating)
                                 ★
