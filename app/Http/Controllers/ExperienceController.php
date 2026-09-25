@@ -39,7 +39,7 @@ class ExperienceController extends Controller
             ->with('destination')
             ->get();
 
-        // Si l'utilisateur n'a aucun post pour ce pays
+        // Si l'utilisateur n'a aucune expérience pour ce pays
         if ($experiences->isEmpty()) {
             abort(404);
         }
@@ -54,14 +54,17 @@ class ExperienceController extends Controller
     }
 
 
-    // Affiche le formulaire pour ajouter un commentaire
+    // Affiche le formulaire pour ajouter une expérience
     public function create($destinationId)
     {
-        return view('experiences.create', compact('destinationId'));
+        return view(
+            'experiences.create',
+            compact('destinationId')
+        );
     }
 
 
-    // Enregistre le commentaire dans la BDD
+    // Enregistre une nouvelle expérience dans la BDD
     public function store(Request $request, $destinationId)
     {
         // Vérifie les informations envoyées par le formulaire
@@ -72,58 +75,88 @@ class ExperienceController extends Controller
             'photo' => 'nullable|image|max:2048',
         ]);
 
+        // Crée une nouvelle expérience
         $experience = new Experience();
 
+        // Destination
         $experience->destination_id = $destinationId;
+
+        // Titre
         $experience->title = $request->title;
+
+        // Contenu
         $experience->content = $request->content;
 
-        // Enregistre la note sur 5
+        // Note sur 5
         $experience->rating = $request->rating;
+
 
         // Enregistre la photo si une photo a été ajoutée
         if ($request->hasFile('photo')) {
-            $experience->photo = $request->file('photo')->store('experiences', 'public');
+
+            $experience->photo = $request
+                ->file('photo')
+                ->store('experiences', 'public');
+
         } else {
+
             $experience->photo = null;
+
         }
 
-        // Utilisateur actuellement connecté
+
+        // Associe l'expérience à l'utilisateur connecté
         $experience->user_id = auth()->id();
 
+
+        // Enregistre l'expérience dans la BDD
         $experience->save();
 
+
         // Retourne sur la page du pays
-        return redirect('/destinations/' . $destinationId);
+        return redirect(
+            '/destinations/' . $destinationId
+        );
     }
 
 
-    // Affiche le formulaire pour modifier un commentaire
+    // Affiche le formulaire pour modifier une expérience
     public function edit($id)
     {
-        // Récupère le commentaire dans la BDD
+        // Récupère l'expérience dans la BDD
         $experience = Experience::findOrFail($id);
 
-        // Vérifie que l'utilisateur connecté est bien l'auteur
+
+        // Seul l'auteur peut modifier son expérience
         if ($experience->user_id !== auth()->id()) {
+
             abort(403);
+
         }
 
+
         // Affiche le formulaire de modification
-        return view('experiences.edit', compact('experience'));
+        return view(
+            'experiences.edit',
+            compact('experience')
+        );
     }
 
 
-    // Modifie un commentaire
+    // Modifie une expérience
     public function update(Request $request, $id)
     {
-        // Récupère le commentaire dans la BDD
+        // Récupère l'expérience dans la BDD
         $experience = Experience::findOrFail($id);
 
-        // Vérifie que l'utilisateur connecté est bien l'auteur
+
+        // Seul l'auteur peut modifier son expérience
         if ($experience->user_id !== auth()->id()) {
+
             abort(403);
+
         }
+
 
         // Vérifie les nouvelles informations
         $request->validate([
@@ -133,42 +166,72 @@ class ExperienceController extends Controller
             'photo' => 'nullable|image|max:2048',
         ]);
 
-        // Modifie le titre, le contenu et la note
+
+        // Modifie le titre
         $experience->title = $request->title;
+
+        // Modifie le contenu
         $experience->content = $request->content;
+
+        // Modifie la note
         $experience->rating = $request->rating;
 
-        // Si une nouvelle photo est ajoutée, remplace l'ancienne
+
+        // Si une nouvelle photo est ajoutée,
+        // elle remplace l'ancienne
         if ($request->hasFile('photo')) {
-            $experience->photo = $request->file('photo')->store('experiences', 'public');
+
+            $experience->photo = $request
+                ->file('photo')
+                ->store('experiences', 'public');
+
         }
+
 
         // Enregistre les modifications
         $experience->save();
 
+
         // Retourne sur la page du pays
-        return redirect('/destinations/' . $experience->destination_id);
+        return redirect(
+            '/destinations/' . $experience->destination_id
+        );
     }
 
 
-    // Supprime un commentaire
+    // Supprime une expérience
     public function destroy($id)
     {
-        // Récupère le commentaire dans la BDD
+        // Récupère l'expérience dans la BDD
         $experience = Experience::findOrFail($id);
 
-        // Vérifie que l'utilisateur connecté est bien l'auteur
-        if ($experience->user_id !== auth()->id()) {
+
+        // Autorise la suppression uniquement si :
+        // - l'utilisateur est l'auteur de l'expérience
+        // OU
+        // - l'utilisateur est administrateur
+        if (
+            $experience->user_id !== auth()->id()
+            && !auth()->user()->is_admin
+        ) {
+
             abort(403);
+
         }
 
-        // Récupère l'ID de la destination avant la suppression
+
+        // Récupère l'ID de la destination
+        // avant de supprimer l'expérience
         $destinationId = $experience->destination_id;
 
-        // Supprime le commentaire
+
+        // Supprime l'expérience
         $experience->delete();
 
+
         // Retourne sur la page du pays
-        return redirect('/destinations/' . $destinationId);
+        return redirect(
+            '/destinations/' . $destinationId
+        );
     }
 }
